@@ -36,9 +36,17 @@ func increaseSlidingWindow(data string) int {
 	ints := helpers.MustIntList(data)
 	increaseCount := 0
 	for i := 3; i < len(ints); i++ {
-		if ints[i]+ints[i-1]+ints[i-2] > ints[i-1]+ints[i-2]+ints[i-3] {
+		if sum(ints[i-2:i+1]) > sum(ints[i-3:i]) {
 			increaseCount++
 		}
 	}
 	return increaseCount
+}
+
+func sum(values []int) int {
+	total := 0
+	for _, n := range values {
+		total += n
+	}
+	return total
 }
